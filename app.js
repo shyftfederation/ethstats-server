@@ -270,7 +270,12 @@ api.on('connection', function (spark)
 	spark.on('enode', function (data) {
 		console.success('API', 'EN', 'Enode from:', data.id);
 		app.enodes[data.id] = data.enode;
-	  });
+  });
+
+	spark.on('tor-enode', function (data) {
+		console.success('API', 'EN', 'Tor enode from:', data.id);
+		app.tor_enodes[data.id] = data.enode;
+  });
 
 	spark.on('history', function (data)
 	{
