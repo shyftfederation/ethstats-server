@@ -1,0 +1,15 @@
+[Unit]
+Description=ethstats
+After=network.target
+
+[Service]
+Environment=PORT=9099 WS_SECRET=fatchance
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/ethstats
+ExecStart=npm start
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
