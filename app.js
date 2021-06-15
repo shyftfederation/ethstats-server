@@ -2,9 +2,11 @@ var _ = require('lodash');
 var logger = require('./lib/utils/logger');
 var chalk = require('chalk');
 var http = require('http');
+var fs = require('fs');
 
 // Init WS SECRET
 var WS_SECRET;
+
 
 if( !_.isUndefined(process.env.WS_SECRET) && !_.isNull(process.env.WS_SECRET) )
 {
@@ -32,14 +34,8 @@ else
 var banned   = require('./lib/utils/config').banned;
 var reserved = require('./lib/utils/config').reserved;
 
-// Init http server
-if( process.env.NODE_ENV !== 'production' )
-{
-	var app = require('./lib/express');
-	server = http.createServer(app);
-}
-else
-	server = http.createServer();
+var app = require('./lib/express');
+server = http.createServer(app);
 
 // Init socket vars
 var Primus = require('primus');
@@ -81,6 +77,7 @@ external.plugin('emit', require('primus-emit'));
 // Init collections
 var Collection = require('./lib/collection');
 var Nodes = new Collection(external);
+
 
 Nodes.setChartsCallback(function (err, charts)
 {
@@ -270,6 +267,15 @@ api.on('connection', function (spark)
 		}
 	});
 
+	spark.on('enode', function (data) {
+		console.success('API', 'EN', 'Enode from:', data.id);
+		app.enodes[data.id] = data.enode;
+  });
+
+	spark.on('tor-enode', function (data) {
+		console.success('API', 'EN', 'Tor enode from:', data.id);
+		app.tor_enodes[data.id] = data.enode;
+  });
 
 	spark.on('history', function (data)
 	{
