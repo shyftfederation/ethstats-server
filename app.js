@@ -194,7 +194,7 @@ api.on('connection', function (spark)
 							data: stats
 						});
 
-						console.success('API', 'BLK', 'Block:', data.block['number'], 'td:', data.block['totalDifficulty'], 'from:', data.id, 'ip:', spark.address.ip);
+//						console.success('API', 'BLK', 'Block:', data.block['number'], 'td:', data.block['totalDifficulty'], 'from:', data.id, 'ip:', spark.address.ip);
 
 						Nodes.getCharts();
 					}
@@ -245,7 +245,7 @@ api.on('connection', function (spark)
 			{
 				if(err !== null)
 				{
-					console.error('API', 'STA', 'Stats error:', err);
+//					console.error('API', 'STA', 'Stats error:', err);
 				}
 				else
 				{
@@ -256,7 +256,6 @@ api.on('connection', function (spark)
 							data: stats
 						});
 
-						console.success('API', 'STA', 'Stats from:', data.id);
 					}
 				}
 			});

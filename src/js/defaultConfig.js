@@ -1,2 +1,2 @@
-var networkName = 'Ethereum';
+var networkName = 'Mainnet';
 var faviconPath = '/favicon.ico';
