@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dist": "grunt",
-    "start": "node ./bin/www"
+    "start": "node --max-old-space-size=1536 ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
